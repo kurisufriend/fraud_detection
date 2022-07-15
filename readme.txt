@@ -1,5 +1,5 @@
 USAGE:
-python3 main.py <max|and
+python3 main.py <max|and>
 max = guess fraudulent if the heuristic for the best column finds it
 and = guess fraudulent if ALL the heuristics determined to be good find it
 
