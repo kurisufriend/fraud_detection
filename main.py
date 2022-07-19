@@ -6,7 +6,7 @@ import sklearn.linear_model
 import sklearn.metrics
 import sklearn.model_selection
 
-# chack args
+# check args
 if "help" in argv:
     print(f"""USAGE:\npython3 main.py""")
     exit(-1)
@@ -22,24 +22,24 @@ except FileNotFoundError:
 data = pandas.read_csv("creditcard.csv")
 data['mean'] = data.mean(axis=1)
 
-# isolate fraud & legitimate sets
+# isolate fraudulent & legitimate sets
 fraud_set = data.loc[data["Class"] == 1]
 legit_set = data.loc[data["Class"] == 0]
 
-#get variables ready for training
+# get variables ready for training
 x = data.loc[:, "V1":"V28"]
 y = data["Class"]
 
 xtrain, xtest, ytrain, ytest = sklearn.model_selection.train_test_split(x, y, random_state = 0)
 
-#train
+# train
 classifier = sklearn.linear_model.SGDClassifier()
 classifier.fit(xtrain, ytrain)
 
-#predict
+# predict
 predictions = classifier.predict(xtest)
 
-#save
+# save
 accuracy = sklearn.metrics.accuracy_score(ytest, predictions)
 save = input(f"accuracy: {accuracy}, save data to .csv? [y/n]")
 data["guess"] = classifier.predict(x).flatten()
