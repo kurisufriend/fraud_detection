@@ -5,6 +5,7 @@ import sklearn
 import sklearn.linear_model
 import sklearn.metrics
 import sklearn.model_selection
+import sklearn.utils
 
 # check args
 if "help" in argv:
@@ -27,10 +28,10 @@ fraud_set = data.loc[data["Class"] == 1]
 legit_set = data.loc[data["Class"] == 0]
 
 # get variables ready for training
-x = data.loc[:, "V1":"V28"]
-y = data["Class"]
+x = sklearn.utils.shuffle(data.loc[:, "V1":"V28"])
+y = sklearn.utils.shuffle(data["Class"])
 
-xtrain, xtest, ytrain, ytest = sklearn.model_selection.train_test_split(x, y, random_state = 0)
+xtrain, xtest, ytrain, ytest = sklearn.model_selection.train_test_split(x, y)
 
 # train
 classifier = sklearn.linear_model.SGDClassifier()
