@@ -46,3 +46,5 @@ data["guess"] = classifier.predict(x).flatten()
 print(data)
 if save.lower() == "y":
     data.to_csv("guesses.csv")
+else:
+    print("exited without saving")
